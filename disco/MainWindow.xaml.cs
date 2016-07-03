@@ -45,7 +45,7 @@ namespace disco {
         private void ControlRestartBtn_Click(object sender, RoutedEventArgs e) {
             RestartServer(GetSelectedServers());
         }
-
+        
         private void StartServer(IEnumerable<string> servers) {
             if (!servers.Any()) {
                 AppendLog("Error: No server(s) selected!");
