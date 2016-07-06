@@ -68,19 +68,5 @@ namespace disco.Properties {
                 return ResourceManager.GetString("AboutText", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to DANS-DEV-1
-        ///DANS-DEV-2
-        ///DANS-QA
-        ///DANS-TEST
-        ///INT-QA
-        ///INT-TEST.
-        /// </summary>
-        public static string Servers {
-            get {
-                return ResourceManager.GetString("Servers", resourceCulture);
-            }
-        }
     }
 }

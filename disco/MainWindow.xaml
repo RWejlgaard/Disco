@@ -3,12 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         GlowBrush="{DynamicResource AccentColorBrush}"
         Background="#FF69B940"
         mc:Ignorable="d"
-        Title="DISCO" Height="367" Width="541" MinHeight="405" MinWidth="598" WindowStartupLocation="CenterScreen" >
+        Title="DISCO" Height="421" Width="633" MinHeight="405" MinWidth="598" WindowStartupLocation="CenterScreen" >
     <metro:MetroWindow.LeftWindowCommands>
         <metro:WindowCommands>
 
@@ -17,6 +18,8 @@
     <metro:MetroWindow.RightWindowCommands>
         <metro:WindowCommands>
             <Button x:Name="TitleAboutBtn" Content="about" Click="TitleAboutBtn_Click" />
+            <Button x:Name="TitleSettingsBtn" Content="settings" Click="TitleSettingsBtn_Click" />
+            <Button x:Name="TitleManageBtn" Content="manage" Click="TitleManageBtn_Click" />
         </metro:WindowCommands>
     </metro:MetroWindow.RightWindowCommands>
 
@@ -35,18 +38,10 @@
                         <ColumnDefinition Width="97*"/>
                     </Grid.ColumnDefinitions>
                     <GroupBox x:Name="GroupBox" Header="Servers" Margin="5,4,5,5" Height="Auto" Width="Auto" Grid.Column="0" Background="#FF69B940" BorderBrush="#FF69B940" Grid.RowSpan="5" BorderThickness="0.6">
-                        <ListView x:Name="ControlServerList" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,0" Foreground="{x:Null}" Focusable="False">
-                            <CheckBox Content="DANS-DEV-1" Margin="5,2,2,2" Width="Auto" Foreground="White" IsHitTestVisible="True"/>
-                            <CheckBox Content="DANS-DEV-2" Margin="5,2,2,2" Width="Auto" Foreground="White" IsHitTestVisible="True"/>
-                            <CheckBox Content="DANS-QA" Margin="5,2,2,2" Width="Auto" Foreground="White" IsHitTestVisible="True"/>
-                            <CheckBox Content="DANS-TEST" Margin="5,2,2,2" Width="Auto" Foreground="White" IsHitTestVisible="True"/>
-                            <CheckBox Content="INT-QA" Margin="5,2,2,2" Width="Auto" Foreground="White" IsHitTestVisible="True"/>
-                            <CheckBox Content="INT-TEST" Margin="5,2,2,2" Width="Auto" Foreground="White" IsHitTestVisible="True"/>
-                            
-                        </ListView>
-                        
+                        <ListView x:Name="ControlServerList" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,0" Foreground="{x:Null}" Focusable="False"/>
+
                     </GroupBox>
-                    <Button x:Name="ServersSelectAllBtn" FontFamily="Product Sans" Style="{DynamicResource SquareButtonStyle}" BorderThickness="1" Margin="10,0,10,10" VerticalAlignment="Bottom" Content="select All" FontWeight="Normal"/>
+                    <Button Grid.Column="0" x:Name="ServersSelectAllBtn" FontFamily="Product Sans" Style="{DynamicResource SquareButtonStyle}" BorderThickness="1" Margin="10,0,10,10" VerticalAlignment="Bottom" Content="select All" FontWeight="Normal" Click="ServersSelectAllBtn_Click"/>
                     <ListBox Grid.Column="1" Height="Auto" Margin="0,5,10,5">
                         <Button x:Name="ControlStartBtn" Style="{DynamicResource SquareButtonStyle}" Content="Start" Margin="0,2,0,2" Height="25"  BorderThickness="1" Click="ControlStartBtn_Click" FontFamily="Product Sans" FontWeight="Normal" />
                         <Button x:Name="ControlStopBtn" Style="{DynamicResource SquareButtonStyle}" Content="Stop" Margin="0,2,0,2" Height="25"  BorderThickness="1" Click="ControlStopBtn_Click" FontFamily="Product Sans" FontWeight="Normal"/>
@@ -56,16 +51,32 @@
             </TabItem>
             <TabItem Header="Deployment" BorderBrush="#FF69B940" FontFamily="Product Sans">
                 <Grid>
-                    <Label x:Name="Label2" Content="UNDER CONTRUCTION" HorizontalAlignment="Left" Margin="-34,115,-39,0" VerticalAlignment="Top" Foreground="White" FontSize="40" RenderTransformOrigin="0.5,0.5" Width="423">
-                        <Label.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-36.411"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Label.RenderTransform>
-                    </Label>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="87*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80*"/>
+                        <ColumnDefinition Width="93*"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox x:Name="DeploymentTargetGroup" Header="Target" Margin="5,4,5,5" Height="Auto" Width="Auto" Grid.Column="0" Grid.Row="0" Background="#FF69B940" BorderBrush="#FF69B940" BorderThickness="0.6">
+                        <Grid Margin="0" VerticalAlignment="Top">
+                            <ComboBox x:Name="DeploymentTargetCombo" VerticalAlignment="Top" Height="17" SelectedIndex="0" FontFamily="Product Sans">
+                                <ComboBoxItem Content="Choose Server"/>
+                            </ComboBox>
+                            <CheckBox x:Name="CheckBox" Content="Force deploy" VerticalAlignment="Top" Margin="0,35,0,0"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox x:Name="DeploymentSvnGroup" Header="SVN" Margin="5,0,5,5" Height="Auto" Width="Auto" Grid.Column="0" Grid.Row="1" Background="#FF69B940" BorderBrush="#FF69B940" BorderThickness="0.6">
+                        <Grid>
+
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox x:Name="DeploymentBranchGroup" Header="Branch" Margin="5,4,5,37" Height="Auto" Width="Auto" Grid.Column="1" Background="#FF69B940" BorderBrush="#FF69B940" BorderThickness="0.6" Grid.RowSpan="2">
+
+                    </GroupBox>
+                    <Button x:Name="DeploymentDeployBtn" Style="{DynamicResource SquareButtonStyle}" BorderThickness="1" Grid.Column="1" Content="deploy" FontFamily="Product Sans" VerticalAlignment="Bottom" Margin="5,0,5,5" FontWeight="Normal" Grid.Row="1"/>
+
                 </Grid>
             </TabItem>
             <dragablz:TabablzControl.InterTabController>
@@ -75,7 +86,7 @@
         <GridSplitter HorizontalAlignment="Stretch" Grid.Column="1" Margin="0,0,1,0" Background="#FF3A3A3A"/>
         <TextBox x:Name="Log" Grid.Column="2" Margin="5" Background="#FF383838" Foreground="White" AcceptsReturn="True" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Lucida Console" />
         <Canvas Grid.Column="0" Margin="10,10,264,334">
-            <Rectangle Fill="#FF69B940" HorizontalAlignment="Left" Height="30" Stroke="#FF69B940" VerticalAlignment="Top" Width="30"/>
+            <Rectangle Fill="#FF69B940" HorizontalAlignment="Left" Height="30" Stroke="#FF69B940" VerticalAlignment="Top" Width="30" MouseDown="Rectangle_MouseDown"/>
             <Label x:Name="Label" Content="KMD" VerticalAlignment="Top" Height="30" Width="57" Foreground="White" HorizontalAlignment="Left" FontFamily="Product Sans" FontSize="21.333" Canvas.Left="35"/>
         </Canvas>
     </Grid>

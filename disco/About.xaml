@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="About" Height="300" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Background="#252525">
-        <TextBlock x:Name="label" TextWrapping="WrapWithOverflow" Margin="5,10,5,175" FontFamily="Product Sans" Text="This software is created solely for internal use, of the KMD DANS project server maintainers. &#10;If you are a customer of KMD, contact the DANS team as soon as possible. &#10;This software is being maintained by ZRW." Foreground="White" TextAlignment="Center" FontSize="13.333"/>
+        <TextBlock x:Name="label" TextWrapping="WrapWithOverflow" Margin="5,10,5,93" FontFamily="Product Sans" Text="This software is created solely for internal use, of the KMD DANS project server maintainers. &#10;If you are a customer of KMD, contact the DANS team as soon as possible. &#10;&#10;This software is being maintained by ZRW." Foreground="White" TextAlignment="Center" FontSize="13.333"/>
         <Label x:Name="label1" Content="Version 0.1.0" HorizontalAlignment="Left" Margin="5,243,0,2" VerticalAlignment="Bottom" FontFamily="Product Sans" FontSize="8"/>
         <Image x:Name="image" Margin="80,179,80,32" Source="Resources\kmd.png"/>
 

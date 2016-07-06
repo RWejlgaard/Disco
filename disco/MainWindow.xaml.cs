@@ -9,16 +9,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using MahApps.Metro.Controls.Dialogs;
+using System.Windows.Input;
+using System.Windows.Media;
 using Renci.SshNet;
 
 namespace disco {
     public partial class MainWindow {
-        readonly SshClient _dansSsh = new SshClient("10.0.0.33", "cosmo", "password");
+        private readonly SshClient _dansSsh = new SshClient("172.20.113.161", "weblogic", "password");
         //Settings _settingsWindow = new Settings();
 
         public MainWindow() {
+            Disco.Default.Upgrade();
             InitializeComponent();
+            ControlServerList.Items.Clear();
+            DeploymentTargetCombo.Items.Clear();
+            foreach (var server in Disco.Default.Servers) {
+                var listItem = new CheckBox {
+                    Content = server,
+                    Margin = new Thickness(5, 2, 2, 2),
+                    Foreground = Brushes.White
+                };
+                ControlServerList.Items.Add(listItem);
+                var comboItem = new ComboBoxItem {Content = server};
+                DeploymentTargetCombo.Items.Add(comboItem);
+            }
         }
 
         private void AppendLog(string var) {
@@ -27,11 +41,10 @@ namespace disco {
         }
 
         private IEnumerable<string> GetSelectedServers() {
-            var _servers =
-                (from _server in ControlServerList.Items.Cast<CheckBox>()
-                    where _server.IsChecked.Value
-                    select _server.Content.ToString()).ToList();
-            return _servers;
+            var servers = (from server in ControlServerList.Items.Cast<CheckBox>()
+                where server.IsChecked.Value
+                select server.Content.ToString()).ToList();
+            return servers;
         }
 
         private void ControlStartBtn_Click(object sender, RoutedEventArgs e) {
@@ -45,7 +58,29 @@ namespace disco {
         private void ControlRestartBtn_Click(object sender, RoutedEventArgs e) {
             RestartServer(GetSelectedServers());
         }
-        
+
+        private void TitleAboutBtn_Click(object sender, RoutedEventArgs e) {
+            var aboutWindow = new About();
+            aboutWindow.ShowDialog();
+        }
+
+        private void ServersSelectAllBtn_Click(object sender, RoutedEventArgs e) {
+            foreach (var server in ControlServerList.Items.Cast<CheckBox>()) {
+                server.IsChecked = true;
+            }
+        }
+
+        private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e) {
+            foreach (var server in Disco.Default.Servers) {
+                AppendLog(server);
+            }
+        }
+
+        private void TitleSettingsBtn_Click(object sender, RoutedEventArgs e) {
+            var settingsWindow = new Settings();
+            settingsWindow.ShowDialog();
+        }
+
         private void StartServer(IEnumerable<string> servers) {
             if (!servers.Any()) {
                 AppendLog("Error: No server(s) selected!");
@@ -56,15 +91,15 @@ namespace disco {
                 _dansSsh.Connect();
                 AppendLog("Success!");
             }
-            catch (Exception _e) {
-                AppendLog("Connection Failed: " + _e);
+            catch (Exception e) {
+                AppendLog("Connection Failed: " + e);
                 return;
             }
             AppendLog("Starting server(s):");
 
-            foreach (var _server in servers) {
-                AppendLog(_server);
-                _dansSsh.RunCommand("sh ~/startserver " + _server);
+            foreach (var server in servers) {
+                AppendLog(server);
+                _dansSsh.RunCommand("sh ~/startserver " + server);
             }
             _dansSsh.Disconnect();
         }
@@ -79,15 +114,15 @@ namespace disco {
                 _dansSsh.Connect();
                 AppendLog("Success!");
             }
-            catch (Exception _e) {
-                AppendLog("Connection Failed: " + _e);
+            catch (Exception e) {
+                AppendLog("Connection Failed: " + e);
                 return;
             }
             AppendLog("Stopping server(s):");
 
-            foreach (var _server in servers) {
-                AppendLog(_server);
-                _dansSsh.RunCommand("sh ~/stopserver " + _server);
+            foreach (var server in servers) {
+                AppendLog(server);
+                _dansSsh.RunCommand("sh ~/stopserver " + server);
             }
             _dansSsh.Disconnect();
         }
@@ -103,10 +138,11 @@ namespace disco {
             StartServer(servers);
         }
 
-        private void TitleAboutBtn_Click(object sender, RoutedEventArgs e)
-        {
-            About _aboutWindow = new About();
-            _aboutWindow.ShowDialog();
+        private void TitleManageBtn_Click(object sender, RoutedEventArgs e) {
+            var serverManagerWindow = new ServerManager();
+            serverManagerWindow.ShowDialog();
         }
+
+       
     }
 }
