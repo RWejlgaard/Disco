@@ -5,6 +5,7 @@ Author: ZRW
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,24 +16,11 @@ using Renci.SshNet;
 
 namespace disco {
     public partial class MainWindow {
-        private readonly SshClient _dansSsh = new SshClient("172.20.113.161", "weblogic", "password");
-        //Settings _settingsWindow = new Settings();
+        private readonly SshClient _dansSsh = new SshClient("dans-app","z6zrw","" );
 
         public MainWindow() {
-            Disco.Default.Upgrade();
             InitializeComponent();
-            ControlServerList.Items.Clear();
-            DeploymentTargetCombo.Items.Clear();
-            foreach (var server in Disco.Default.Servers) {
-                var listItem = new CheckBox {
-                    Content = server,
-                    Margin = new Thickness(5, 2, 2, 2),
-                    Foreground = Brushes.White
-                };
-                ControlServerList.Items.Add(listItem);
-                var comboItem = new ComboBoxItem {Content = server};
-                DeploymentTargetCombo.Items.Add(comboItem);
-            }
+            UpdateServerLists();
         }
 
         private void AppendLog(string var) {
@@ -40,8 +28,24 @@ namespace disco {
             Log.ScrollToEnd();
         }
 
+        private void UpdateServerLists() {
+            Disco.Default.Upgrade();
+            ControlServerList.Children.Clear();
+            DeploymentTargetCombo.Items.Clear();
+            foreach (var server in Disco.Default.Servers) {
+                var listItem = new CheckBox {
+                    Content = server,
+                    Margin = new Thickness(5, 2, 2, 2),
+                    Foreground = Brushes.White
+                };
+                ControlServerList.Children.Add(listItem);
+                var comboItem = new ComboBoxItem {Content = server};
+                DeploymentTargetCombo.Items.Add(comboItem);
+            }
+        }
+
         private IEnumerable<string> GetSelectedServers() {
-            var servers = (from server in ControlServerList.Items.Cast<CheckBox>()
+            var servers = (from server in ControlServerList.Children.Cast<CheckBox>()
                 where server.IsChecked.Value
                 select server.Content.ToString()).ToList();
             return servers;
@@ -65,15 +69,18 @@ namespace disco {
         }
 
         private void ServersSelectAllBtn_Click(object sender, RoutedEventArgs e) {
-            foreach (var server in ControlServerList.Items.Cast<CheckBox>()) {
+            foreach (var server in ControlServerList.Children.Cast<CheckBox>()) {
                 server.IsChecked = true;
             }
         }
 
         private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e) {
-            foreach (var server in Disco.Default.Servers) {
-                AppendLog(server);
-            }
+            AppendLog("Connecting to DANS-APP...");
+            AppendLog("Success!");
+            AppendLog("Starting server(s):");
+            AppendLog("DANS-DEV-1");
+            AppendLog("INT-QA");
+
         }
 
         private void TitleSettingsBtn_Click(object sender, RoutedEventArgs e) {
@@ -99,7 +106,7 @@ namespace disco {
 
             foreach (var server in servers) {
                 AppendLog(server);
-                _dansSsh.RunCommand("sh ~/startserver " + server);
+                _dansSsh.RunCommand("sh /appl/zrw/startserver" + server);
             }
             _dansSsh.Disconnect();
         }
@@ -122,7 +129,7 @@ namespace disco {
 
             foreach (var server in servers) {
                 AppendLog(server);
-                _dansSsh.RunCommand("sh ~/stopserver " + server);
+                _dansSsh.RunCommand("sh /appl/zrw/stopserver" + server);
             }
             _dansSsh.Disconnect();
         }
@@ -141,8 +148,15 @@ namespace disco {
         private void TitleManageBtn_Click(object sender, RoutedEventArgs e) {
             var serverManagerWindow = new ServerManager();
             serverManagerWindow.ShowDialog();
+            serverManagerWindow.Closing += Manager_Closing;
         }
 
-       
+        public void Manager_Closing(object sender, CancelEventArgs e) {
+            UpdateServerLists();
+        }
+
+        private void ServersRefreshBtn_Click(object sender, RoutedEventArgs e) {
+            UpdateServerLists();
+        }
     }
 }

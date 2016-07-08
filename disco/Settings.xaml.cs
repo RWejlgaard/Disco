@@ -17,6 +17,7 @@ namespace disco {
 
         private async void SettingsAddServerBtn_Click(object sender, RoutedEventArgs e) {
             var newServer = await this.ShowInputAsync("Add Server", "Enter server name:");
+            if (newServer == null) return;
             Disco.Default.Servers.Add(newServer);
             Disco.Default.Save();
         }

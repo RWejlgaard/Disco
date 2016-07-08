@@ -11,15 +11,17 @@
         Title="About" Height="342.538" Width="503.731" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Background="#252525">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="39*"/>
-            <ColumnDefinition Width="44*"/>
+            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="91*" />
         </Grid.ColumnDefinitions>
-        <ListView x:Name="listView" Grid.Column="1" Height="295" Margin="5,5,5,6" Width="244">
-            <ListBoxItem Content="Server1"/>
-            <ListBoxItem Content="Server2"/>
-            <ListBoxItem Content="Server3"/>
-            <ListBoxItem Content="Server4"/>
-        </ListView>
+        <ListView x:Name="ManagerServerList" Background="#FF383838" BorderThickness="1" Grid.Column="1" Height="Auto" Margin="0,10,10,10" Width="Auto" BorderBrush="#FFCCCCCC" Foreground="White" FontFamily="Product Sans" SelectionChanged="ManagerServerList_SelectionChanged" SelectionMode="Single"/>
+        <StackPanel Margin="10">
+            <Button x:Name="ManageAddServerBtn" Style="{DynamicResource SquareButtonStyle}" BorderThickness="1" Margin="0,0,0,10" Content="Add server" FontFamily="Product Sans" FontWeight="Normal" Click="ManageAddServerBtn_Click"/>
+            <Button x:Name="ManageRemoveServerBtn" Style="{DynamicResource SquareButtonStyle}" BorderThickness="1" Margin="0,0,0,10" Content="remove server" FontFamily="Product Sans" FontWeight="Normal" IsEnabled="False" Click="ManageRemoveServerBtn_Click"/>
+            <Button x:Name="ManageMoveUpBtn" Style="{DynamicResource SquareButtonStyle}" BorderThickness="1" Margin="0,0,0,10" Content="Move Up" FontFamily="Product Sans" FontWeight="Normal" IsEnabled="False" Click="ManageMoveUpBtn_Click"/>
+            <Button x:Name="ManageMoveDownBtn" Style="{DynamicResource SquareButtonStyle}" BorderThickness="1" Margin="0,0,0,10" Content="Move Down" FontFamily="Product Sans" FontWeight="Normal" IsEnabled="False" Click="ManageMoveDownBtn_Click"/>
+
+        </StackPanel>
 
     </Grid>
 </metro:MetroWindow>

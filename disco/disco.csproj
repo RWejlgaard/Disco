@@ -148,8 +148,7 @@
       <SubType>Designer</SubType>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Scripts\bower.json" />
-    <None Include="Scripts\build.log" />
+    <None Include="Scripts\jquery-2.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -158,10 +157,10 @@
     <Resource Include="Resources\kmd.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Scripts\LICENSE.txt" />
-    <Content Include="Scripts\polymer-micro.html" />
-    <Content Include="Scripts\polymer-mini.html" />
-    <Content Include="Scripts\polymer.html" />
+    <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\nugetexample.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
