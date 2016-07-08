@@ -35,7 +35,7 @@ namespace disco {
             foreach (var server in Disco.Default.Servers) {
                 var listItem = new CheckBox {
                     Content = server,
-                    Margin = new Thickness(5, 2, 2, 2),
+                    Margin = new Thickness(5, 5, 5, 2),
                     Foreground = Brushes.White
                 };
                 ControlServerList.Children.Add(listItem);
