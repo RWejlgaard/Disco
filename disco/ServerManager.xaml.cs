@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
 namespace disco {
@@ -35,8 +36,8 @@ namespace disco {
         }
 
         private async void ManageAddServerBtn_Click(object sender, RoutedEventArgs e) {
-            var newServer = await this.ShowInputAsync("Add Server", "Enter server name:");
-            Disco.Default.Servers.Add(newServer);
+            //var newServer = await mess("Add Server", "Enter server name:");
+           // Disco.Default.Servers.Add(newServer);
             Disco.Default.Save();
             UpdateServerList();
         }

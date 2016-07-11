@@ -16,7 +16,7 @@ using Renci.SshNet;
 
 namespace disco {
     public partial class MainWindow {
-        private readonly SshClient _dansSsh = new SshClient("dans-app","z6zrw","" );
+        private readonly SshClient _dansSsh = new SshClient("172.20.114.4","weblogic","password");
 
         public MainWindow() {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace disco {
             foreach (var server in Disco.Default.Servers) {
                 var listItem = new CheckBox {
                     Content = server,
-                    Margin = new Thickness(5, 2, 2, 2),
+                    Margin = new Thickness(5, 5, 5, 2),
                     Foreground = Brushes.White
                 };
                 ControlServerList.Children.Add(listItem);
