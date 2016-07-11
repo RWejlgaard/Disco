@@ -16,7 +16,7 @@ using Renci.SshNet;
 
 namespace disco {
     public partial class MainWindow {
-        private readonly SshClient _dansSsh = new SshClient("dans-app","z6zrw","" );
+        private readonly SshClient _dansSsh = new SshClient("172.20.114.4","weblogic","password");
 
         public MainWindow() {
             InitializeComponent();
