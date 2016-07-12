@@ -1,0 +1,26 @@
+﻿<controls:MetroWindow x:Class="disco.LoadKey"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        GlowBrush="#FF242F34"
+        BorderThickness="1"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        WindowTitleBrush="#FF2D3D45"
+        NonActiveGlowBrush="#FF242F34" 
+        NonActiveBorderBrush="{x:Null}" 
+        NonActiveWindowTitleBrush="#FF2D3D45"
+        Title="Load Private Key" Height="240.101" Width="291.098" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="#DDFFFFFF">
+    <Grid>
+        <Button x:Name="LoadKeyBrowseBtn" Content="Browse" HorizontalAlignment="Left" Margin="50,41,0,0" VerticalAlignment="Top" Width="80" Background="#FF4CAF50" BorderBrush="#FF4CAF50" Click="LoadKeyBrowseBtn_Click"/>
+        <PasswordBox x:Name="LoadKeyPasswordInput" Margin="50,110,50,73" VerticalAlignment="Top" Password="password" GotFocus="LoadKeyPasswordInput_GotFocus"/>
+        <Label x:Name="LoadKeyFileLbl" Content="" HorizontalAlignment="Left" Margin="135,46,0,0" VerticalAlignment="Top" Height="27" Width="96"/>
+        <Button x:Name="LoadKeySubmitBtn" Content="Submit" Margin="50,147,50,30" Height="Auto" Click="LoadKeySubmitBtn_Click" IsEnabled="False"/>
+        <TextBox x:Name="LoadKeyUsernameInput" HorizontalAlignment="Left" Height="27" Margin="50,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+
+    </Grid>
+</controls:MetroWindow>

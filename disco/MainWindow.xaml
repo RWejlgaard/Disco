@@ -12,15 +12,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         WindowTitleBrush="#FF2D3D45"
+        NonActiveGlowBrush="#FF242F34" 
+        NonActiveBorderBrush="{x:Null}" 
+        NonActiveWindowTitleBrush="#FF2D3D45"
+        WindowStartupLocation="CenterScreen"
         MinWidth="647"
         MinHeight="472"
         Height="472" 
-        Width="647" NonActiveGlowBrush="#FF242F34" NonActiveBorderBrush="{x:Null}" NonActiveWindowTitleBrush="#FF2D3D45"
+        Width="647"
         >
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
-            <Button Content="about" x:Name="TitleAboutBtn" Click="TitleAboutBtn_Click"  />
-            <Button Content="settings" x:Name="TitleSettingsBtn" Click="TitleSettingsBtn_Click"/>
+            <Button Content="about" x:Name="TitleAboutBtn" Click="TitleAboutBtn_Click"/>
             <Button Content="manage" x:Name="TitleManageBtn" Click="TitleManageBtn_Click"/>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
@@ -79,15 +82,11 @@
 
                 </Grid>
             </TabItem>
-            <dragablz:TabablzControl.InterTabController>
-                <dragablz:InterTabController />
-            </dragablz:TabablzControl.InterTabController>
-
         </dragablz:TabablzControl>
-        <GridSplitter HorizontalAlignment="Stretch" Grid.Column="1" Margin="0,0,1,0" Background="#FF3A3A3A"/>
+        <GridSplitter HorizontalAlignment="Stretch" Grid.Column="1" Margin="0,0,1,0" Background="#FF2D3D45" Opacity="1"/>
         <TextBox x:Name="Log" Grid.Column="2" Margin="5" Background="#7F383838" Foreground="White" AcceptsReturn="True" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Lucida Console" FontSize="11" />
-        <Canvas Grid.Column="0" Margin="10,10,264,397">
-            <Rectangle Fill="#FF69B940" HorizontalAlignment="Left" Height="30" Stroke="#FF69B940" VerticalAlignment="Top" Width="30" MouseDown="Rectangle_MouseDown"/>
+        <Canvas Grid.Column="0" Margin="10,10,297,397">
+            <Rectangle Fill="#FF69B940" HorizontalAlignment="Left" Height="30" Stroke="#FF69B940" VerticalAlignment="Top" Width="30"/>
             <Label x:Name="Label" Content="KMD" VerticalAlignment="Top" Height="30" Width="57" Foreground="White" HorizontalAlignment="Left" FontFamily="Product Sans" FontSize="21.333" Canvas.Left="35"/>
         </Canvas>
     </Grid>

@@ -16,11 +16,22 @@ using Renci.SshNet;
 
 namespace disco {
     public partial class MainWindow {
-        private readonly SshClient _dansSsh = new SshClient("172.20.114.4","weblogic","password");
+        public static PrivateKeyFile KeyFile;
+        private readonly SshClient _dansSsh;
 
         public MainWindow() {
             InitializeComponent();
             UpdateServerLists();
+            var loadKeyWindow = new LoadKey();
+            loadKeyWindow.ShowDialog();
+            try {
+                KeyFile = new PrivateKeyFile(loadKeyWindow.KeyFilePath, loadKeyWindow.Password);
+                _dansSsh = new SshClient("dans-app", loadKeyWindow.UserName, KeyFile);
+            }
+            catch {
+                MessageBox.Show("Invalid credentials");
+                Close();
+            }
         }
 
         private void AppendLog(string var) {
@@ -74,20 +85,6 @@ namespace disco {
             }
         }
 
-        private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e) {
-            AppendLog("Connecting to DANS-APP...");
-            AppendLog("Success!");
-            AppendLog("Starting server(s):");
-            AppendLog("DANS-DEV-1");
-            AppendLog("INT-QA");
-
-        }
-
-        private void TitleSettingsBtn_Click(object sender, RoutedEventArgs e) {
-            var settingsWindow = new Settings();
-            settingsWindow.ShowDialog();
-        }
-
         private void StartServer(IEnumerable<string> servers) {
             if (!servers.Any()) {
                 AppendLog("Error: No server(s) selected!");
@@ -106,7 +103,7 @@ namespace disco {
 
             foreach (var server in servers) {
                 AppendLog(server);
-                _dansSsh.RunCommand("sh /appl/zrw/startserver" + server);
+                _dansSsh.RunCommand("sh /appl/zrw/startserver.sh " + server);
             }
             _dansSsh.Disconnect();
         }
@@ -129,7 +126,7 @@ namespace disco {
 
             foreach (var server in servers) {
                 AppendLog(server);
-                _dansSsh.RunCommand("sh /appl/zrw/stopserver" + server);
+                _dansSsh.RunCommand("sh /appl/zrw/stopserver.sh " + server);
             }
             _dansSsh.Disconnect();
         }

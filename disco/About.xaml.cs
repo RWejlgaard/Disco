@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ONLY FOR INTERNAL KMD USE
+Author: ZRW
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
