@@ -37,18 +37,16 @@
             <TabItem Header="Control" BorderBrush="#FF4CAF50" FontFamily="Product Sans">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="125*" MinWidth="100"/>
-                        <ColumnDefinition Width="40*"/>
-                        <ColumnDefinition Width="202*"/>
+                        <ColumnDefinition Width="169*" MinWidth="150"/>
+                        <ColumnDefinition Width="204*"/>
                     </Grid.ColumnDefinitions>
-                    <GroupBox x:Name="GroupBox" Header="Servers" Margin="5,7,5,5" Height="Auto" Width="Auto" Grid.Column="0" BorderBrush="#FF4CAF50" BorderThickness="0.6" Grid.ColumnSpan="2" Background="#FF4CAF50">
+                    <GroupBox x:Name="GroupBox" Header="Servers" Margin="5,7,5,5" Height="Auto" Width="Auto" Grid.Column="0" BorderBrush="#FF4CAF50" BorderThickness="0.6" Background="#FF4CAF50">
                         <ScrollViewer Margin="0,0,0,32">
                             <StackPanel x:Name="ControlServerList" Focusable="False"/>
                         </ScrollViewer>
                     </GroupBox>
-                    <Button Grid.Column="0" x:Name="ServersSelectAllBtn" FontFamily="Product Sans" BorderThickness="1" Margin="10,0,3,10" VerticalAlignment="Bottom" Content="select All" FontWeight="Normal" Click="ServersSelectAllBtn_Click" Height="27"/>
-                    <Button Grid.Column="1" x:Name="ServersRefreshBtn" FontFamily="Product Sans" BorderThickness="1" Margin="4,0,10,10" VerticalAlignment="Bottom" Content="↻" FontWeight="Normal" Click="ServersRefreshBtn_Click" Height="27" Width="Auto"></Button>
-                    <StackPanel Grid.Column="2" Height="Auto" Margin="5,7,5,5">
+                    <Button Grid.Column="0" x:Name="ServersSelectAllBtn" FontFamily="Product Sans" BorderThickness="1" Margin="10,0,10,10" VerticalAlignment="Bottom" Content="select All" FontWeight="Normal" Click="ServersSelectAllBtn_Click" Height="27"/>
+                    <StackPanel Grid.Column="1" Height="Auto" Margin="5,7,5,5">
                         <Button x:Name="ControlStartBtn" Content="Start" Margin="0,0,0,2" Height="25"  BorderThickness="1" Click="ControlStartBtn_Click" FontFamily="Product Sans" FontWeight="Normal" />
                         <Button x:Name="ControlStopBtn" Content="Stop" Margin="0,5,0,2" Height="25"  BorderThickness="1" Click="ControlStopBtn_Click" FontFamily="Product Sans" FontWeight="Normal"/>
                         <Button x:Name="ControlRestartBtn" Content="Restart" Margin="0,5,0,2" Height="26"  BorderThickness="1" Click="ControlRestartBtn_Click" FontFamily="Product Sans" FontWeight="Normal" Background="#FF4CAF50"/>

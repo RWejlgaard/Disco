@@ -27,12 +27,8 @@
 
             </ResourceDictionary.MergedDictionaries>
             
-            <ResourceDictionary x:Key="Resources">
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="Properties/Resources.resx"/>
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-            
+            <ResourceDictionary x:Key="Resources" />
+
             <ResourceDictionary x:Key="Floyout" Source="pack://application:,,,/MaterialDesignThemes.MahApps;component/Themes/MaterialDesignTheme.MahApps.Flyout.xaml" />
 
             <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" />
@@ -41,3 +37,4 @@
 
     </Application.Resources>
 </Application>
+

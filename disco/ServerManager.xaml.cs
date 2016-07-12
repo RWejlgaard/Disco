@@ -2,13 +2,8 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
 
 namespace disco {
-    /// <summary>
-    ///     Interaction logic for ServerManager.xaml
-    /// </summary>
     public partial class ServerManager {
         public ServerManager() {
             InitializeComponent();
@@ -35,32 +30,17 @@ namespace disco {
             }
         }
 
-        private async void ManageAddServerBtn_Click(object sender, RoutedEventArgs e) {
-            //var newServer = await mess("Add Server", "Enter server name:");
-           // Disco.Default.Servers.Add(newServer);
-            Disco.Default.Save();
+        private void ManageAddServerBtn_Click(object sender, RoutedEventArgs e) {
+            var addServerWindow = new AddServer();
+            addServerWindow.ShowDialog();
             UpdateServerList();
         }
 
         private void ManageRemoveServerBtn_Click(object sender, RoutedEventArgs e) {
-            var removeServer = (ListViewItem)ManagerServerList.SelectedItem;
+            var removeServer = (ListViewItem) ManagerServerList.SelectedItem;
             Disco.Default.Servers.Remove(removeServer.Content.ToString());
             Disco.Default.Save();
             UpdateServerList();
-        }
-
-        public static void MoveUp<T>(IList<T> list, int index) {
-            if (index <= 0) { return; }
-            var old = list[index - 1];
-            list[index - 1] = list[index];
-            list[index] = old;
-        }
-
-        public static void MoveDown<T>(IList<T> list, int index) {
-            if (index >= list.Count - 1) { return; }
-            var old = list[index + 1];
-            list[index + 1] = list[index];
-            list[index] = old;
         }
 
         private void ManageMoveUpBtn_Click(object sender, RoutedEventArgs e) {
@@ -80,6 +60,20 @@ namespace disco {
             Disco.Default.Servers.AddRange(serverList.ToArray());
             Disco.Default.Save();
             UpdateServerList();
+        }
+
+        public static void MoveUp<T>(IList<T> list, int index) {
+            if (index <= 0) return;
+            var old = list[index - 1];
+            list[index - 1] = list[index];
+            list[index] = old;
+        }
+
+        public static void MoveDown<T>(IList<T> list, int index) {
+            if (index >= list.Count - 1) return;
+            var old = list[index + 1];
+            list[index + 1] = list[index];
+            list[index] = old;
         }
     }
 }

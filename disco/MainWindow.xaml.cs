@@ -5,12 +5,10 @@ Author: ZRW
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 using Renci.SshNet;
 
@@ -145,14 +143,6 @@ namespace disco {
         private void TitleManageBtn_Click(object sender, RoutedEventArgs e) {
             var serverManagerWindow = new ServerManager();
             serverManagerWindow.ShowDialog();
-            serverManagerWindow.Closing += Manager_Closing;
-        }
-
-        public void Manager_Closing(object sender, CancelEventArgs e) {
-            UpdateServerLists();
-        }
-
-        private void ServersRefreshBtn_Click(object sender, RoutedEventArgs e) {
             UpdateServerLists();
         }
     }
