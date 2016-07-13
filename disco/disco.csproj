@@ -79,6 +79,14 @@
       <HintPath>..\packages\SSH.NET.2013.4.7\lib\net40\Renci.SshNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SharpSvn, Version=1.8016.3866.130, Culture=neutral, PublicKeyToken=d729672594885a28, processorArchitecture=x86">
+      <HintPath>..\packages\SharpSvn.1.8-x86.1.8016.3866.130\lib\net40\SharpSvn.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpSvn.UI, Version=1.8016.3866.130, Culture=neutral, PublicKeyToken=33789aa53ca44aa9, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpSvn.1.8-x86.1.8016.3866.130\lib\net40\SharpSvn.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -103,9 +111,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddBranch.xaml.cs">
+      <DependentUpon>AddBranch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddServer.xaml.cs">
       <DependentUpon>AddServer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Disco.cs" />
     <Compile Include="Disco.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -114,12 +126,19 @@
     <Compile Include="LoadKey.xaml.cs">
       <DependentUpon>LoadKey.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BranchManager.xaml.cs">
+      <DependentUpon>BranchManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ServerManager.xaml.cs">
       <DependentUpon>ServerManager.xaml</DependentUpon>
     </Compile>
     <Page Include="About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddBranch.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="AddServer.xaml">
       <SubType>Designer</SubType>
@@ -144,6 +163,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="BranchManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ServerManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,6 +191,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="dans-ant-build.bat" />
     <None Include="Disco.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Disco.Designer.cs</LastGenOutput>

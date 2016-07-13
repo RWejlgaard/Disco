@@ -62,14 +62,14 @@ namespace disco {
             UpdateServerList();
         }
 
-        public static void MoveUp<T>(IList<T> list, int index) {
+        private static void MoveUp<T>(IList<T> list, int index) {
             if (index <= 0) return;
             var old = list[index - 1];
             list[index - 1] = list[index];
             list[index] = old;
         }
 
-        public static void MoveDown<T>(IList<T> list, int index) {
+        private static void MoveDown<T>(IList<T> list, int index) {
             if (index >= list.Count - 1) return;
             var old = list[index + 1];
             list[index + 1] = list[index];

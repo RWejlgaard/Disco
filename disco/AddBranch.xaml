@@ -1,0 +1,34 @@
+﻿<controls:MetroWindow x:Class="disco.AddBranch"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        GlowBrush="#FF242F34"
+        BorderThickness="1"
+        ShowCloseButton="False"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        WindowTitleBrush="#FF2D3D45"
+        NonActiveGlowBrush="#FF242F34" 
+        NonActiveBorderBrush="{x:Null}" 
+        NonActiveWindowTitleBrush="#FF2D3D45"
+        Title="Add Server" Height="149.3" Width="271.513" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="#DDFFFFFF">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64*"/>
+            <RowDefinition Height="55*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="44*"/>
+            <ColumnDefinition Width="44*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="AddBranchAddBtn" Content="Add" Margin="10" Grid.Column="1" Height="Auto" Grid.Row="1" Click="AddBranchAddBtn_Click" FontFamily="Product Sans" FontWeight="Normal"/>
+        <Button x:Name="AddBranchCancelBtn" Content="Cancel" Margin="10" Grid.Column="0" Height="Auto" Grid.Row="1" Click="AddBranchCancelBtn_Click" FontFamily="Product Sans" FontWeight="Normal"/>
+        <TextBox x:Name="AddBranchBranchNameInput" Margin="10,27,10,10" FontFamily="Product Sans" FontWeight="Normal" TextWrapping="Wrap" Grid.ColumnSpan="2" Height="27"/>
+        <Label Content="Branch url:" HorizontalAlignment="Left" Margin="8,13,0,0" VerticalAlignment="Top" FontFamily="Product Sans" FontSize="10" Foreground="#7FFFFFFF"/>
+
+    </Grid>
+</controls:MetroWindow>

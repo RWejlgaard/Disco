@@ -2,6 +2,7 @@
 ONLY FOR INTERNAL KMD USE
 Author: ZRW
 */
+
 using System;
 using System.Linq;
 using System.Windows;
@@ -23,11 +24,12 @@ namespace disco {
             fileDialog.ShowDialog();
             KeyFilePath = fileDialog.FileName;
             LoadKeyFileLbl.Content = fileDialog.FileName.Split('\\').Last();
+            LoadKeyUsernameInput.IsEnabled = true;
+            LoadKeyPasswordInput.IsEnabled = true;
             LoadKeySubmitBtn.IsEnabled = true;
         }
 
         private void LoadKeySubmitBtn_Click(object sender, RoutedEventArgs e) {
-
             UserName = LoadKeyUsernameInput.Text;
             Password = LoadKeyPasswordInput.Password;
             Close();

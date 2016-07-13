@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="disco.ServerManager"
+﻿<controls:MetroWindow x:Class="disco.BranchManager"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -21,14 +21,14 @@
             <ColumnDefinition Width="75*" />
             <ColumnDefinition Width="91*" />
         </Grid.ColumnDefinitions>
-        <ListView x:Name="ManagerServerList" Background="#7F383838" BorderThickness="1" Grid.Column="1" Height="Auto"
+        <ListView x:Name="ManagerBranchList" Background="#7F383838" BorderThickness="1" Grid.Column="1" Height="Auto"
                   Margin="0,10,10,10" Width="Auto" BorderBrush="#FFCCCCCC" Foreground="White" FontFamily="Product Sans"
-                  SelectionChanged="ManagerServerList_SelectionChanged" SelectionMode="Single" />
+                  SelectionChanged="ManagerBranchList_SelectionChanged" SelectionMode="Single" />
         <StackPanel Margin="10">
-            <Button x:Name="ManageAddServerBtn" BorderThickness="1" Margin="0,0,0,10" Content="Add server"
-                    FontFamily="Product Sans" FontWeight="Normal" Click="ManageAddServerBtn_Click" />
-            <Button x:Name="ManageRemoveServerBtn" BorderThickness="1" Margin="0,0,0,10" Content="Remove server"
-                    FontFamily="Product Sans" FontWeight="Normal" IsEnabled="False" Click="ManageRemoveServerBtn_Click" />
+            <Button x:Name="ManageAddBranchBtn" BorderThickness="1" Margin="0,0,0,10" Content="Add branch"
+                    FontFamily="Product Sans" FontWeight="Normal" Click="ManageAddBranchBtn_Click" />
+            <Button x:Name="ManageRemoveBranchBtn" BorderThickness="1" Margin="0,0,0,10" Content="Remove branch"
+                    FontFamily="Product Sans" FontWeight="Normal" IsEnabled="False" Click="ManageRemoveBranchBtn_Click" />
             <Button x:Name="ManageMoveUpBtn" BorderThickness="1" Margin="0,0,0,10" Content="Move Up"
                     FontFamily="Product Sans" FontWeight="Normal" IsEnabled="False" Click="ManageMoveUpBtn_Click" />
             <Button x:Name="ManageMoveDownBtn" BorderThickness="1" Margin="0,0,0,10" Content="Move Down"
