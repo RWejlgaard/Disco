@@ -11,13 +11,16 @@ namespace disco {
         }
 
         private void UpdateBranchList() {
+            // Clears UI element
             ManagerBranchList.Items.Clear();
-            foreach (var server in Disco.Default.Branches) {
-                ManagerBranchList.Items.Add(new ListViewItem {Content = server});
+            // Loads up branches from branch list
+            foreach (var branch in Disco.Default.Branches) {
+                ManagerBranchList.Items.Add(new ListViewItem {Content = branch});
             }
         }
 
         private void ManagerBranchList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            // Disables buttons if no branch is selected, it shouldn't be possible
             if (ManagerBranchList.SelectedValue != null) {
                 ManageRemoveBranchBtn.IsEnabled = true;
                 ManageMoveUpBtn.IsEnabled = true;
@@ -31,6 +34,7 @@ namespace disco {
         }
 
         private void ManageAddBranchBtn_Click(object sender, RoutedEventArgs e) {
+            // Shows addBranch dialog and updates UI elements
             var addBranchWindow = new AddBranch();
             addBranchWindow.ShowDialog();
             UpdateBranchList();
@@ -62,6 +66,7 @@ namespace disco {
             UpdateBranchList();
         }
 
+        // Moves specified index up one step in given list
         private static void MoveUp<T>(IList<T> list, int index) {
             if (index <= 0) return;
             var old = list[index - 1];
@@ -69,6 +74,7 @@ namespace disco {
             list[index] = old;
         }
 
+        // Moves specified index down one step in given list
         private static void MoveDown<T>(IList<T> list, int index) {
             if (index >= list.Count - 1) return;
             var old = list[index + 1];

@@ -6,6 +6,7 @@ Author: ZRW
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using Microsoft.Win32;
 
 namespace disco {
@@ -37,6 +38,14 @@ namespace disco {
 
         private void LoadKeyPasswordInput_GotFocus(object sender, RoutedEventArgs e) {
             LoadKeyPasswordInput.Clear();
+        }
+
+        private void LoadKeyPasswordInput_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key != Key.Return) return;
+            UserName = LoadKeyUsernameInput.Text;
+            Password = LoadKeyPasswordInput.Password;
+            Close();
         }
     }
 }

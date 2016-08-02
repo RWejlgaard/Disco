@@ -11,13 +11,16 @@ namespace disco {
         }
 
         private void UpdateServerList() {
+            // Clears UI element
             ManagerServerList.Items.Clear();
+            // Loads up servers from server list
             foreach (var server in Disco.Default.Servers) {
                 ManagerServerList.Items.Add(new ListViewItem {Content = server});
             }
         }
 
         private void ManagerServerList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            // Disables buttons if no server is selected, this should not happen
             if (ManagerServerList.SelectedValue != null) {
                 ManageRemoveServerBtn.IsEnabled = true;
                 ManageMoveUpBtn.IsEnabled = true;
@@ -31,6 +34,7 @@ namespace disco {
         }
 
         private void ManageAddServerBtn_Click(object sender, RoutedEventArgs e) {
+            // Shows addServer dialog and updates UI elements
             var addServerWindow = new AddServer();
             addServerWindow.ShowDialog();
             UpdateServerList();
@@ -62,6 +66,7 @@ namespace disco {
             UpdateServerList();
         }
 
+        // Moves specified index up one step in given list
         private static void MoveUp<T>(IList<T> list, int index) {
             if (index <= 0) return;
             var old = list[index - 1];
@@ -69,6 +74,7 @@ namespace disco {
             list[index] = old;
         }
 
+        // Moves specified index down one step in given list
         private static void MoveDown<T>(IList<T> list, int index) {
             if (index >= list.Count - 1) return;
             var old = list[index + 1];

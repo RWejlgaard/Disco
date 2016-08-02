@@ -14,7 +14,7 @@
         Title="About" Height="300" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <TextBlock TextWrapping="WrapWithOverflow" Margin="5,10,5,93" FontFamily="Product Sans" Text="This software is created solely for internal use, of the KMD DANS project server maintainers. &#10;If you are a customer of KMD, contact the DANS team as soon as possible. &#10;&#10;This software is being maintained by ZRW." Foreground="White" TextAlignment="Center" FontSize="13.333"/>
-        <Label Content="Version 0.1.0" HorizontalAlignment="Left" Margin="5,243,0,2" VerticalAlignment="Bottom" FontFamily="Product Sans" FontSize="8"/>
+        <Label Content="Version 1.0.0" HorizontalAlignment="Left" Margin="5,243,0,2" VerticalAlignment="Bottom" FontFamily="Product Sans" FontSize="8"/>
         <Image Margin="80,179,80,32" Source="Resources\kmd.png"/>
 
     </Grid>

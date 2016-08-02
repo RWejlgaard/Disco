@@ -26,7 +26,7 @@
                   SelectionChanged="ManagerServerList_SelectionChanged" SelectionMode="Single" />
         <StackPanel Margin="10">
             <Button x:Name="ManageAddServerBtn" BorderThickness="1" Margin="0,0,0,10" Content="Add server"
-                    FontFamily="Product Sans" FontWeight="Normal" Click="ManageAddServerBtn_Click" />
+                    FontFamily="Product Sans" FontWeight="Normal" IsEnabled="True" Click="ManageAddServerBtn_Click" />
             <Button x:Name="ManageRemoveServerBtn" BorderThickness="1" Margin="0,0,0,10" Content="Remove server"
                     FontFamily="Product Sans" FontWeight="Normal" IsEnabled="False" Click="ManageRemoveServerBtn_Click" />
             <Button x:Name="ManageMoveUpBtn" BorderThickness="1" Margin="0,0,0,10" Content="Move Up"

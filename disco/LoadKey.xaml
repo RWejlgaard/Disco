@@ -17,10 +17,10 @@
         Title="Load Private Key" Height="240.101" Width="291.098" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="#DDFFFFFF">
     <Grid>
         <Button x:Name="LoadKeyBrowseBtn" Content="Browse" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Left" Margin="50,41,0,0" VerticalAlignment="Top" Width="80" Background="#FF2D3D45" BorderBrush="#FF4CAF50" Click="LoadKeyBrowseBtn_Click" Foreground="#CCFFFFFF"/>
-        <PasswordBox x:Name="LoadKeyPasswordInput" Margin="50,110,50,73" VerticalAlignment="Top" Password="password" GotFocus="LoadKeyPasswordInput_GotFocus" IsEnabled="False"/>
+        <PasswordBox x:Name="LoadKeyPasswordInput"  Margin="50,110,50,73" VerticalAlignment="Top" Password="password" GotFocus="LoadKeyPasswordInput_GotFocus" IsEnabled="False" KeyDown="LoadKeyPasswordInput_KeyDown"/>
         <Label x:Name="LoadKeyFileLbl" Content="" HorizontalAlignment="Left" Margin="135,46,0,0" VerticalAlignment="Top" Height="27" Width="96"/>
         <Button x:Name="LoadKeySubmitBtn" Content="Submit" Margin="50,147,50,30" Height="Auto" Click="LoadKeySubmitBtn_Click" IsEnabled="False"/>
-        <TextBox x:Name="LoadKeyUsernameInput" HorizontalAlignment="Left" Height="27" Margin="50,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" IsEnabled="False"/>
+        <TextBox x:Name="LoadKeyUsernameInput" Height="27" Margin="50,78,50,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False"/>
 
     </Grid>
 </controls:MetroWindow>

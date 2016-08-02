@@ -20,7 +20,9 @@ namespace disco {
 
         public MainWindow() {
             InitializeComponent();
+            // Updates UI elements with possible changes in Branch or Server lists
             UpdateServerLists();
+            //Prepares for loading private key and shows window
             var loadKeyWindow = new LoadKey();
             loadKeyWindow.ShowDialog();
             try {
@@ -39,10 +41,14 @@ namespace disco {
         }
 
         private void UpdateServerLists() {
+            // This loads up previous changes and commits them to cold storage
             Disco.Default.Upgrade();
+            // Clear all UI elements
             ControlServerList.Children.Clear();
             DeploymentTargetCombo.Items.Clear();
             DeploymentBranchCombo.Items.Clear();
+
+            // Loads up Server list and appends it to UI elements
             foreach (var server in Disco.Default.Servers) {
                 var listItem = new CheckBox {
                     Content = server,
@@ -53,6 +59,8 @@ namespace disco {
                 var comboItem = new ComboBoxItem {Content = server};
                 DeploymentTargetCombo.Items.Add(comboItem);
             }
+
+            // Loads up Branch list and appends it to UI elements
             foreach (var branch in Disco.Default.Branches) {
                 var comboItem = new ComboBoxItem {Content = branch};
                 DeploymentBranchCombo.Items.Add(comboItem);
@@ -61,6 +69,7 @@ namespace disco {
             DeploymentBranchCombo.SelectedIndex = 0;
         }
 
+        // Returns a string array with names of selected servers
         private IEnumerable<string> GetSelectedServers() {
             var servers = (from server in ControlServerList.Children.Cast<CheckBox>()
                 where server.IsChecked.Value
@@ -115,24 +124,36 @@ namespace disco {
                 DeploymentVersionInput.BorderBrush = Brushes.Red;
                 return;
             }
-            Checkout(branch);
-            Compile(branch, version);
+            var branchName = branch.Split('/').Last();
+            /*Checkout(branch);
+            Compile(GetDansBranchPath(branchName), version);
+            Commit(GetDansBranchPath(branchName));*/
+            Deploy(target, branchName);
         }
 
         private async void Checkout(string url) {
             var branchName = url.Split('/').Last();
-            var appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var checkoutPath = Path.Combine(appdataPath, "disco", "branches", branchName);
+            var checkoutPath = GetDansBranchPath(branchName);
             var svnClient = new SvnClient();
             AppendLog("Checking out from SVN...");
+            // This is an async operator, it makes sure Checkout() runs in background without freezing the whole application
             await Task.Run(() => { svnClient.CheckOut(new SvnUriTarget(url), checkoutPath); });
             AppendLog("Complete!");
         }
 
-        private void Compile(string branch, string version) {
+        private async void Commit(string path) {
+            var svnClient = new SvnClient();
+            AppendLog("Committing to SVN...");
+            await Task.Run(() => { svnClient.Commit(path); });
+            AppendLog("Complete!");
         }
 
-        private void Deploy(string target, string branch) {
+
+        private void Compile(string path, string version) {
+           
+        }
+
+        private async void Deploy(string target, string branch) {
             AppendLog("Connecting to DANS-APP...");
             try {
                 _dansSsh.Connect();
@@ -144,16 +165,21 @@ namespace disco {
             }
             var shortBranch = branch.Split('/').Last();
             AppendLog("Running deploy script on DANS-APP..");
-            _dansSsh.RunCommand("cd /appl/zrw && sh deploy.sh -t " + target + " -b " + shortBranch);
+            AppendLog("This might take a while");
+            var command = ("sh autodeploy.sh -t " + target + " -b " + shortBranch);
+            await Task.Run(() => { _dansSsh.RunCommand("cd /appl/zrw && " + command); });
+            AppendLog("Successfully completed deploy script");
+            
         }
 
-        private string GetDansBranchPath(string branch) {
+        private static string GetDansBranchPath(string branch) {
             var appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             var path = Path.Combine(appdataPath, "disco", "branches", branch);
             return path;
         }
 
         private void StartServer(IEnumerable<string> servers) {
+            // Checks if there are any servers selected
             if (!servers.Any()) {
                 AppendLog("Error: No server(s) selected!");
                 return;
@@ -169,6 +195,10 @@ namespace disco {
             }
             AppendLog("Starting server(s):");
 
+            /*
+             * Runs startserver script for every server in list
+             * this is a critical dependency and should be loaded from application 
+             */
             foreach (var server in servers) {
                 AppendLog(server);
                 _dansSsh.RunCommand("sh /appl/zrw/startserver.sh " + server);

@@ -30,7 +30,7 @@
     </controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="368*" MinWidth="266" />
+            <ColumnDefinition Width="328*" MinWidth="266" />
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="223*" MinWidth="200" />
         </Grid.ColumnDefinitions>
@@ -90,15 +90,12 @@
                             Click="DeploymentCompileAndDeployBtn_Click" />
                     <Button x:Name="DeploymentDeployBtn" Content="Deploy" Margin="5" Height="Auto" Grid.Row="2"
                             FontFamily="Product Sans" FontWeight="Normal" Grid.Column="1" />
-                    <Rectangle Fill="#99000000" Grid.RowSpan="3" Grid.ColumnSpan="2" />
-                    <TextBlock Text="Comming soon" TextAlignment="Center" Grid.ColumnSpan="2" FontSize="24"
-                               Foreground="#C8D6D6D6" Grid.RowSpan="2" Grid.Row="1" />
                 </Grid>
             </TabItem>
         </dragablz:TabablzControl>
-        <GridSplitter HorizontalAlignment="Stretch" Grid.Column="1" Margin="0,0,1,0" Background="#FF2D3D45" Opacity="1" />
-        <TextBox x:Name="Log" Grid.Column="2" Margin="5" Background="#7F383838" Foreground="White" AcceptsReturn="True"
-                 IsReadOnly="True" TextWrapping="Wrap" FontFamily="Lucida Console" FontSize="11" />
+        <GridSplitter HorizontalAlignment="Stretch" Grid.Column="1" Margin="0,0,1,0" Background="{DynamicResource MaterialDesignPaper}" Opacity="1" />
+        <TextBox x:Name="Log" Grid.Column="2" Margin="0,5,5,5" Background="#7F383838" Foreground="White" AcceptsReturn="True"
+                 IsReadOnly="True" FontFamily="Product Sans" TextWrapping="Wrap" />
         <Canvas Grid.Column="0" Margin="10,10,297,397">
             <Rectangle Fill="#FF69B940" HorizontalAlignment="Left" Height="30" Stroke="#FF69B940"
                        VerticalAlignment="Top" Width="30" />
