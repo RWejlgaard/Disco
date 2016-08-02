@@ -5,11 +5,13 @@ Author: ZRW
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Renci.SshNet;
 using SharpSvn;
@@ -125,10 +127,11 @@ namespace disco {
                 return;
             }
             var branchName = branch.Split('/').Last();
-            /*Checkout(branch);
+            Checkout(branch);
             Compile(GetDansBranchPath(branchName), version);
-            Commit(GetDansBranchPath(branchName));*/
+            //Commit(GetDansBranchPath(branchName));
             Deploy(target, branchName);
+            RestartServer(new List<string>{target});
         }
 
         private async void Checkout(string url) {
@@ -148,9 +151,45 @@ namespace disco {
             AppendLog("Complete!");
         }
 
+        private async void Compile(string path, string version) {
+            AppendLog("Starting build...");
+            AppendLog("This should take 30 min...");
+            try {
+                // Runs dans-ant-build.bat asynchronous, to not stall program during runtime
+                await RunProcessAsync(Path.Combine(Environment.CurrentDirectory, "dans-ant-build.bat"), path + " " + version);
+                AppendLog("Compile successful!");
+            }
+            catch (Exception) {
+                AppendLog("Script failed to execute - file missing?");
+                throw;
+            }
+        }
 
-        private void Compile(string path, string version) {
-           
+        /*
+         * At the time of writing Process.Start() does not have an asynchronous counterpart
+         * and therefore it has to be written manually
+         */
+        private static Task RunProcessAsync(string fileName, string arguments) {
+            var completionSource = new TaskCompletionSource<bool>();
+
+            var process = new Process {
+                StartInfo = {
+                    FileName = fileName,
+                    Arguments = arguments
+                },
+                // This makes the process trigger the exited event
+                EnableRaisingEvents = true
+            };
+
+            // When process is complete, cleanup afterwards
+            process.Exited += (sender, args) => {
+                completionSource.SetResult(true);
+                process.Dispose();
+            };
+
+            process.Start();
+
+            return completionSource.Task;
         }
 
         private async void Deploy(string target, string branch) {
@@ -163,13 +202,18 @@ namespace disco {
                 AppendLog("Connection Failed: " + e);
                 return;
             }
+
+            // Takes the branch name from the url
             var shortBranch = branch.Split('/').Last();
+
             AppendLog("Running deploy script on DANS-APP..");
             AppendLog("This might take a while");
-            var command = ("sh autodeploy.sh -t " + target + " -b " + shortBranch);
+
+            // Runs deploy script
+            var command = "sh autodeploy.sh -t " + target + " -b " + shortBranch;
             await Task.Run(() => { _dansSsh.RunCommand("cd /appl/zrw && " + command); });
+
             AppendLog("Successfully completed deploy script");
-            
         }
 
         private static string GetDansBranchPath(string branch) {

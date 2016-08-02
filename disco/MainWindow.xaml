@@ -98,7 +98,7 @@
                  IsReadOnly="True" FontFamily="Product Sans" TextWrapping="Wrap" />
         <Canvas Grid.Column="0" Margin="10,10,297,397">
             <Rectangle Fill="#FF69B940" HorizontalAlignment="Left" Height="30" Stroke="#FF69B940"
-                       VerticalAlignment="Top" Width="30" />
+                       VerticalAlignment="Top" Width="30"/>
             <Label Content="KMD" VerticalAlignment="Top" Height="30" Width="57" Foreground="White"
                    HorizontalAlignment="Left" FontFamily="Product Sans" FontSize="21.333" Canvas.Left="35" />
         </Canvas>

@@ -230,7 +230,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="dans-ant-build.bat" />
+    <None Include="dans-ant-build.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Disco.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Disco.Designer.cs</LastGenOutput>
@@ -245,6 +247,9 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="test.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
